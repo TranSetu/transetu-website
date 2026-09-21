@@ -4,16 +4,18 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import OnboardingModal from "@/components/OnboardingModal";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -47,7 +49,7 @@ export default function Navbar() {
         observers.forEach((observer) => observer?.disconnect());
       };
     } else if (pathname.startsWith("/product")) {
-      setActiveLink("products");
+      requestAnimationFrame(() => setActiveLink("products"));
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -106,6 +108,13 @@ export default function Navbar() {
         <div className="nav-actions">
           <button
             type="button"
+            className="btn-onboarding"
+            onClick={() => setIsOnboardingOpen(true)}
+          >
+            Onboarding
+          </button>
+          <button
+            type="button"
             className="mobile-menu-toggle"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -141,8 +150,24 @@ export default function Navbar() {
         >
           Products
         </Link>
+        <button
+          type="button"
+          className="mobile-signup-btn"
+          onClick={() => {
+            setIsMenuOpen(false);
+            setIsOnboardingOpen(true);
+          }}
+        >
+          Onboarding
+        </button>
       </div>
     </div>
+
+    {/* Onboarding Multi-Step Modal */}
+    <OnboardingModal
+      isOpen={isOnboardingOpen}
+      onClose={() => setIsOnboardingOpen(false)}
+    />
   </>
 );
 }

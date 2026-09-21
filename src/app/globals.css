@@ -251,6 +251,30 @@ section {
   box-shadow: 0 4px 14px rgba(89, 199, 28, 0.35);
 }
 
+.btn-onboarding {
+  background-color: #05A223;
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.25);
+}
+
+.btn-onboarding:hover {
+  background-color: #087A3E;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(89, 199, 28, 0.38);
+}
+
 .btn-signup {
   background: transparent;
   color: #05A223;
@@ -407,9 +431,9 @@ body.menu-open {
   /* Dark contrast scrim: ensures white headings and green text/icons pop clearly over the video */
   background: linear-gradient(
     160deg,
-    rgba(6, 20, 11, 0.65) 0%,
-    rgba(8, 26, 15, 0.50) 50%,
-    rgba(6, 18, 11, 0.68) 100%
+    rgba(6, 20, 11, 0.50) 0%,
+    rgba(8, 26, 15, 0.36) 50%,
+    rgba(6, 18, 11, 0.52) 100%
   );
   z-index: 2;
 }
@@ -419,8 +443,8 @@ body.menu-open {
    To INCREASE or DECREASE blurriness of the background video, 
    adjust the 'filter: blur(...px);' value below.
    - Light blur:   filter: blur(2px);
-   - Current:      filter: blur(4px);
-   - Strong blur:  filter: blur(8px);
+   - Moderate:     filter: blur(3px);
+   - Strong blur:  filter: blur(6px);
    - Disable blur: filter: none;
    ========================================================================== */
 .hero-bg-video-el,
@@ -428,9 +452,9 @@ body.menu-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.88;
-  filter: blur(4px); /* <-- EDIT BLUR LEVEL HERE */
-  transform: scale(1.05); /* Prevents blurred edge vignette/gap */
+  opacity: 0.92;
+  filter: blur(2px); /* <-- REDUCED SLIGHTLY AS REQUESTED */
+  transform: scale(1.04); /* Prevents blurred edge vignette/gap */
 }
 
 /* Subtle diagonal brand motif inspired by visiting card */
@@ -1378,7 +1402,8 @@ body.menu-open {
 
   .nav-links,
   .nav-actions .btn-contact,
-  .nav-actions .btn-signup {
+  .nav-actions .btn-signup,
+  .nav-actions .btn-onboarding {
     display: none;
   }
 
