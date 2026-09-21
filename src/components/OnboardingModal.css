@@ -1,0 +1,1360 @@
+/* ==========================================================================
+   TranSetu Onboarding Modal Styles
+   Matches TranSetu Brand: #05A223, #59C71C, #10231D, #DCE8E1, #EAF4EE
+   ========================================================================== */
+
+.onboarding-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(11, 23, 42, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow-y: auto;
+}
+
+.onboarding-dialog {
+  position: relative;
+  width: min(94vw, 760px);
+  max-height: min(92dvh, 860px);
+  background: #ffffff;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 24px;
+  box-shadow: 0 28px 70px rgba(5, 162, 35, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #10231D;
+  margin: auto;
+}
+
+/* Header */
+.onboarding-header {
+  position: relative;
+  min-height: 110px;
+  padding: 20px 28px;
+  background: #0B172A;
+  border-bottom: 2px solid #05A223;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.onboarding-header-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.onboarding-header-image-content {
+  object-fit: cover;
+  object-position: center 36%;
+  opacity: 0.72;
+}
+
+.onboarding-header-image-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(11, 23, 42, 0.94) 0%,
+    rgba(8, 122, 62, 0.65) 50%,
+    rgba(11, 23, 42, 0.90) 100%
+  );
+  pointer-events: none;
+}
+
+.onboarding-header-left {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.onboarding-header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(5, 162, 35, 0.25);
+  border: 1px solid rgba(89, 199, 28, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #59C71C;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.onboarding-header-title {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.onboarding-header-subtitle {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
+  margin-top: 4px;
+  line-height: 1.35;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.onboarding-close-btn {
+  position: relative;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(11, 23, 42, 0.45);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  flex-shrink: 0;
+  outline: none;
+}
+
+.onboarding-close-btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.onboarding-close-btn:hover {
+  background: rgba(5, 162, 35, 0.3);
+  border-color: rgba(89, 199, 28, 0.6);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.onboarding-close-btn:focus-visible {
+  border-color: #05A223;
+  box-shadow: 0 0 0 2px rgba(5, 162, 35, 0.35);
+}
+
+/* Stepper Progress Bar (Desktop: 6 Steps) */
+.onboarding-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #DCE8E1;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.onboarding-step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.onboarding-step-item:last-child {
+  flex: 0 0 auto;
+}
+
+.onboarding-step-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: default;
+  min-width: 0;
+}
+
+.onboarding-step-pill.clickable {
+  cursor: pointer;
+}
+
+.onboarding-step-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  background: #EAF4EE;
+  color: #263D35;
+  border: 1.5px solid #DCE8E1;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.onboarding-step-item.active .onboarding-step-number {
+  background: #05A223;
+  color: #ffffff;
+  border-color: #05A223;
+  box-shadow: 0 0 0 3px rgba(5, 162, 35, 0.15);
+}
+
+.onboarding-step-item.completed .onboarding-step-number {
+  background: #59C71C;
+  color: #ffffff;
+  border-color: #59C71C;
+}
+
+.onboarding-step-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #263D35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.25s ease;
+}
+
+.onboarding-step-item.active .onboarding-step-label {
+  color: #05A223;
+  font-weight: 700;
+}
+
+.onboarding-step-item.completed .onboarding-step-label {
+  color: #10231D;
+}
+
+.onboarding-step-divider {
+  flex: 1;
+  height: 2px;
+  background: #DCE8E1;
+  margin: 0 2px;
+  transition: background 0.3s ease;
+  min-width: 8px;
+}
+
+.onboarding-step-divider.completed {
+  background: #59C71C;
+}
+
+/* Mobile Stepper Summary */
+.onboarding-mobile-progress {
+  display: none;
+  padding: 12px 20px;
+  background: #EAF4EE;
+  border-bottom: 1px solid #DCE8E1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #10231D;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.onboarding-mobile-step-badge {
+  background: #05A223;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Content Area */
+.onboarding-content {
+  padding: 24px 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #F6FAF7 100%);
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Step Header */
+.onboarding-step-header {
+  margin-bottom: 20px;
+}
+
+.onboarding-step-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #10231D;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onboarding-step-desc {
+  font-size: 13px;
+  color: #263D35;
+  margin-top: 4px;
+}
+
+/* Form Groups & Grid */
+.onboarding-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.onboarding-form-grid.single-col {
+  grid-template-columns: 1fr;
+}
+
+.onboarding-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-field.full-span {
+  grid-column: 1 / -1;
+}
+
+.onboarding-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #10231D;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.onboarding-required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.onboarding-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.onboarding-input-icon {
+  position: absolute;
+  left: 12px;
+  color: #263D35;
+  pointer-events: none;
+}
+
+.onboarding-input-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #263D35;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.onboarding-input-toggle:hover {
+  color: #05A223;
+}
+
+.onboarding-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px 0 40px;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #10231D;
+  background: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.onboarding-input.has-toggle {
+  padding-right: 42px;
+}
+
+.onboarding-input:focus {
+  border-color: #05A223;
+  box-shadow: 0 0 0 3px rgba(5, 162, 35, 0.12);
+}
+
+.onboarding-input.has-error {
+  border-color: #dc2626;
+  background: #FFF5F5;
+}
+
+.onboarding-input.has-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.onboarding-error-msg {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.onboarding-hint {
+  font-size: 11px;
+  color: #263D35;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Step 1: Mobile & OTP Specific Styles
+   ========================================================================== */
+
+.onboarding-otp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.onboarding-otp-sent-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #EAF4EE;
+  border: 1px solid #DCE8E1;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #10231D;
+}
+
+.onboarding-otp-change-num {
+  background: none;
+  border: none;
+  color: #05A223;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.onboarding-otp-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.onboarding-otp-digit {
+  width: 46px;
+  height: 52px;
+  border-radius: 12px;
+  border: 1.5px solid #DCE8E1;
+  background: #ffffff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #10231D;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.onboarding-otp-digit:focus {
+  border-color: #05A223;
+  box-shadow: 0 0 0 3px rgba(5, 162, 35, 0.15);
+  background: #F8FCF8;
+}
+
+.onboarding-otp-digit.has-error {
+  border-color: #dc2626;
+  background: #FFF5F5;
+}
+
+.onboarding-otp-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.onboarding-resend-btn {
+  background: none;
+  border: none;
+  color: #05A223;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.onboarding-resend-btn:disabled {
+  color: #94A3B8;
+  cursor: not-allowed;
+}
+
+.onboarding-resend-notice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #EAF4EE;
+  border: 1px solid #B9D5C3;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #05A223;
+  margin-top: 6px;
+}
+
+/* ==========================================================================
+   Step 2: Profile Details & Password Checklist
+   ========================================================================== */
+
+.onboarding-avatar-card {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1.5px dashed #DCE8E1;
+  border-radius: 14px;
+  transition: border-color 0.2s;
+}
+
+.onboarding-avatar-card:hover {
+  border-color: #05A223;
+  background: #FAFCFA;
+}
+
+.onboarding-avatar-preview {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #EAF4EE;
+  border: 2px solid #59C71C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #05A223;
+  flex-shrink: 0;
+}
+
+.onboarding-avatar-preview img {
+  object-fit: cover;
+}
+
+.onboarding-avatar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.onboarding-avatar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #10231D;
+}
+
+.onboarding-avatar-subtext {
+  font-size: 12px;
+  color: #263D35;
+}
+
+.onboarding-avatar-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.onboarding-avatar-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #05A223;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.onboarding-avatar-upload-label:hover {
+  background: #087A3E;
+}
+
+.onboarding-avatar-remove-btn {
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.onboarding-avatar-remove-btn:hover {
+  background: #FEE2E2;
+}
+
+/* Password Requirements Checklist */
+.onboarding-password-rules {
+  grid-column: 1 / -1;
+  background: #F8FAF9;
+  border: 1px solid #DCE8E1;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-top: 2px;
+}
+
+.onboarding-password-rules-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #10231D;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.onboarding-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.onboarding-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.onboarding-rule-item.fulfilled {
+  color: #05A223;
+  font-weight: 600;
+}
+
+.onboarding-rule-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #94A3B8;
+  transition: color 0.2s ease;
+}
+
+.onboarding-rule-item.fulfilled .onboarding-rule-icon {
+  color: #05A223;
+}
+
+/* Notes field (matches reference image: green border, rounded box, clear X) */
+.onboarding-notes-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.onboarding-notes-input {
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 42px 12px 14px;
+  border: 1.5px solid #05A223;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #10231D;
+  background: #ffffff;
+  outline: none;
+  resize: vertical;
+  transition: all 0.2s ease;
+}
+
+.onboarding-notes-input:focus {
+  border-color: #05A223;
+  box-shadow: 0 0 0 3px rgba(5, 162, 35, 0.15);
+}
+
+.onboarding-notes-input.has-error {
+  border-color: #dc2626;
+  background: #FFF5F5;
+}
+
+.onboarding-notes-clear-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #05A223;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.onboarding-notes-clear-btn:hover {
+  color: #087A3E;
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* ==========================================================================
+   Upload Section (Aadhaar, PAN, Bank Passbook)
+   ========================================================================== */
+
+.onboarding-uploads-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #10231D;
+  margin: 18px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.onboarding-uploads-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.onboarding-uploads-grid.single-col,
+.onboarding-uploads-grid.full-width {
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.onboarding-upload-card {
+  position: relative;
+  border: 1.5px dashed #DCE8E1;
+  border-radius: 14px;
+  padding: 16px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 150px;
+}
+
+.onboarding-upload-card.full-width {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 22px 20px;
+}
+
+.onboarding-upload-card:hover {
+  border-color: #05A223;
+  background: #F4F8F5;
+}
+
+.onboarding-upload-card.has-file {
+  border-style: solid;
+  border-color: #59C71C;
+  background: #F8FCF8;
+}
+
+.onboarding-upload-icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #EAF4EE;
+  color: #05A223;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.onboarding-upload-card:hover .onboarding-upload-icon-circle {
+  background: #05A223;
+  color: #ffffff;
+}
+
+.onboarding-upload-card.has-file .onboarding-upload-icon-circle {
+  background: #59C71C;
+  color: #ffffff;
+}
+
+.onboarding-upload-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #10231D;
+}
+
+.onboarding-upload-subtext {
+  font-size: 11px;
+  color: #263D35;
+  margin-top: 2px;
+}
+
+.onboarding-upload-btn-label {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #05A223;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.onboarding-upload-card:hover .onboarding-upload-btn-label {
+  background: #087A3E;
+}
+
+/* Preview when file uploaded */
+.onboarding-upload-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.onboarding-upload-img-box {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #DCE8E1;
+  background: #f1f5f3;
+}
+
+.onboarding-upload-pdf-box {
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 8px;
+  border: 1px solid #DCE8E1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.onboarding-upload-pdf-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #FEE2E2;
+  color: #DC2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.onboarding-upload-file-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.onboarding-upload-filename {
+  font-size: 12px;
+  font-weight: 600;
+  color: #10231D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.onboarding-upload-filesize {
+  font-size: 11px;
+  color: #263D35;
+}
+
+.onboarding-upload-actions-bar {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onboarding-upload-action-btn {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: #05A223;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.onboarding-upload-action-btn:hover {
+  background: #EAF4EE;
+}
+
+.onboarding-upload-action-btn.delete {
+  color: #dc2626;
+}
+
+.onboarding-upload-action-btn.delete:hover {
+  background: #FEE2E2;
+}
+
+/* Security / Trust Notice */
+.onboarding-trust-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #EAF4EE;
+  border: 1px solid #DCE8E1;
+  border-radius: 10px;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #10231D;
+}
+
+.onboarding-trust-icon {
+  color: #05A223;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Step 6: Review Screen Styles
+   ========================================================================== */
+
+.onboarding-review-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.onboarding-review-card {
+  background: #ffffff;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 14px;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+}
+
+.onboarding-review-card:hover {
+  border-color: #B9D5C3;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.05);
+}
+
+.onboarding-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #EAF4EE;
+}
+
+.onboarding-review-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #10231D;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onboarding-review-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #EAF4EE;
+  color: #05A223;
+  border: 1px solid #DCE8E1;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.onboarding-review-edit-btn:hover {
+  background: #05A223;
+  color: #ffffff;
+  border-color: #05A223;
+}
+
+.onboarding-review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.onboarding-review-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-review-item-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #263D35;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.onboarding-review-item-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #10231D;
+  margin-top: 2px;
+  word-break: break-word;
+}
+
+.onboarding-review-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.onboarding-review-avatar {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #EAF4EE;
+  border: 1.5px solid #59C71C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #05A223;
+  flex-shrink: 0;
+}
+
+.onboarding-review-avatar img {
+  object-fit: cover;
+}
+
+.onboarding-review-docs-list {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.onboarding-review-doc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #F4F8F5;
+  border: 1px solid #DCE8E1;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #10231D;
+}
+
+.onboarding-review-doc-badge .badge-icon {
+  color: #05A223;
+}
+
+.onboarding-review-consent {
+  padding: 12px 16px;
+  background: #EAF4EE;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #263D35;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Footer Actions Bar
+   ========================================================================== */
+
+.onboarding-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: #ffffff;
+  border-top: 1px solid #DCE8E1;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.onboarding-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #DCE8E1;
+  background: #ffffff;
+  color: #10231D;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.onboarding-btn-back:hover {
+  background: #EAF4EE;
+  border-color: #B9D5C3;
+}
+
+.onboarding-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 28px;
+  border-radius: 10px;
+  border: none;
+  background: #05A223;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.3);
+  margin-left: auto;
+}
+
+.onboarding-btn-primary:hover:not(:disabled) {
+  background: #087A3E;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(5, 162, 35, 0.35);
+}
+
+.onboarding-btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Step 7: Submission / Waiting Screen
+   ========================================================================== */
+
+.onboarding-waiting-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.onboarding-waiting-icon-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #EAF4EE;
+  border: 2px solid #59C71C;
+  color: #05A223;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(89, 199, 28, 0.25);
+}
+
+.onboarding-waiting-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #10231D;
+  margin-bottom: 8px;
+}
+
+.onboarding-waiting-subtitle {
+  font-size: 15px;
+  color: #263D35;
+  max-width: 480px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.onboarding-waiting-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.onboarding-waiting-support-box {
+  margin-top: 14px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid #DCE8E1;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #10231D;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onboarding-waiting-support-link {
+  color: #05A223;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.onboarding-waiting-support-link:hover {
+  color: #087A3E;
+}
+
+/* ==========================================================================
+   Responsive Rules
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .onboarding-dialog {
+    width: 96vw;
+    border-radius: 18px;
+  }
+
+  .onboarding-header {
+    padding: 16px 20px;
+    min-height: 90px;
+  }
+
+  .onboarding-header-title {
+    font-size: 17px;
+  }
+
+  .onboarding-header-subtitle {
+    font-size: 12px;
+  }
+
+  .onboarding-header-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .onboarding-progress-bar {
+    display: none;
+  }
+
+  .onboarding-mobile-progress {
+    display: flex;
+  }
+
+  .onboarding-content {
+    padding: 18px 16px;
+  }
+
+  .onboarding-form-grid,
+  .onboarding-uploads-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .onboarding-rules-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .onboarding-avatar-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .onboarding-avatar-btns {
+    justify-content: center;
+  }
+
+  .onboarding-footer {
+    padding: 12px 16px;
+  }
+
+  .onboarding-btn-primary,
+  .onboarding-btn-back {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding-dialog {
+    width: 98vw;
+    max-height: 94dvh;
+    border-radius: 14px;
+  }
+
+  .onboarding-header {
+    padding: 14px;
+  }
+
+  .onboarding-content {
+    padding: 14px;
+  }
+
+  .onboarding-step-title {
+    font-size: 16px;
+  }
+
+  .onboarding-otp-boxes {
+    gap: 6px;
+  }
+
+  .onboarding-otp-digit {
+    width: 40px;
+    height: 46px;
+    font-size: 19px;
+  }
+
+  .onboarding-footer {
+    padding: 12px 14px;
+  }
+}
