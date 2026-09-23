@@ -20,6 +20,12 @@ import {
 import Image from "next/image";
 import "./FastagEnquiryModal.css";
 
+// The static export drops src/app/api/*, so on the deployed site this must
+// point at the backend (api.transetu.com). Falls back to the bundled route,
+// which only exists under `npm run dev`.
+const ENQUIRY_ENDPOINT =
+  process.env.NEXT_PUBLIC_ENQUIRY_API_URL || "/api/fastag-enquiry";
+
 export interface FastagEnquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -211,7 +217,7 @@ export default function FastagEnquiryModal({
         payload.append("pincode", formData.pincode.trim());
       }
 
-      const response = await fetch("/api/fastag-enquiry", {
+      const response = await fetch(ENQUIRY_ENDPOINT, {
         method: "POST",
         body: payload,
       });
