@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# transetu-website
 
-## Getting Started
+Marketing site for TranSetu — [transetu.com](https://transetu.com).
 
-First, run the development server:
+Next.js 16 (App Router), exported as a static site and served from GitHub Pages.
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run build   # static export into out/
+npm run lint
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To preview exactly what gets deployed:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build && npx serve out
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the
+export and publishes `out/` to GitHub Pages. The custom domain is pinned by
+`public/CNAME`; the workflow fails the build if that file goes missing from the
+export, since losing it unsets the domain.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GitHub Pages must be set to **Build and deployment → Source: GitHub Actions**.
+On the legacy "Deploy from a branch" setting Pages runs Jekyll against the repo
+root instead, which serves this README as the homepage.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Enquiry form
 
-## Deploy on Vercel
+`src/app/api/fastag-enquiry/route.ts` is a Node route handler that emails
+enquiries over SMTP. **A static export cannot run it** — `output: 'export'`
+drops `src/app/api/*` from the build silently, with no error.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The form posts to `NEXT_PUBLIC_ENQUIRY_API_URL`, set as a repository variable
+and read at build time. Until that points at a live endpoint on
+`api.transetu.com`, the form has nowhere to submit. The route handler is kept
+in the repo as the reference implementation to port to the backend.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Known gaps
+
+Several flows are UI-only — they show a success screen without sending
+anything anywhere:
+
+- `/signup` — OTP is never requested or verified
+- `OnboardingModal` — agent onboarding
+- `ProductOrderForm` — collects PAN/RC documents (currently unreachable)
+- GPS application modal on `/product/gps-tracker` (currently unreachable)
+
+Do not link users to these until they are wired to a backend.
