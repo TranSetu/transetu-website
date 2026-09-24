@@ -14,6 +14,10 @@ import { useEffect } from "react";
  * So: do not change this page's path. `https://transetu.com/bajaj-app/` is the
  * text inside the approved template, and the trailing slash matters —
  * next.config.ts sets `trailingSlash: true`. See ts-platform/docs/sms-dlt/.
+ *
+ * The copy says "Bajaj Finance", not "Bajaj Finserv", because that is the name
+ * on both store listings the customer is about to land on, and it matches the
+ * wording of the SMS that brought them here.
  */
 
 // "Bajaj Finance : UPI & Loan App" by Bajaj Finance Limited. The package name
@@ -58,9 +62,9 @@ export default function BajajAppRedirect() {
       <div className="card">
         <img className="logo" src="/assets/Nav_logo.png" alt="Transetu" />
 
-        <h1>Download the Bajaj Finserv app</h1>
+        <h1>Download the Bajaj Finance app</h1>
         <p className="lead">
-          Your FASTag is issued by Bajaj Finserv. Use their app to manage it.
+          Your FASTag is issued by Bajaj Finance. Use their app to manage it.
         </p>
 
         <a className="btn" href={ANDROID_URL} rel="noopener">
