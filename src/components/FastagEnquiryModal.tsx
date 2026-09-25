@@ -20,11 +20,8 @@ import {
 import Image from "next/image";
 import "./FastagEnquiryModal.css";
 
-// The static export drops src/app/api/*, so on the deployed site this must
-// point at the backend (api.transetu.com). Falls back to the bundled route,
-// which only exists under `npm run dev`.
-const ENQUIRY_ENDPOINT =
-  process.env.NEXT_PUBLIC_ENQUIRY_API_URL || "/api/fastag-enquiry";
+const WEB3FORMS_ACCESS_KEY = "6fb105c2-ec5b-41e5-8182-6b8adfc98b62";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 export interface FastagEnquiryModalProps {
   isOpen: boolean;
@@ -87,6 +84,12 @@ export default function FastagEnquiryModal({
   const isGps = type === "gps";
   const isFastagHolder = type === "fastag-holder";
   const isSimpleForm = isGps || isFastagHolder;
+  const productLabel =
+    type === "fastag-holder"
+      ? "FASTag Holder"
+      : type === "gps"
+      ? "GPS Tracker"
+      : "FASTag";
   const content = getModalContent(type);
 
   const handleClose = () => {
@@ -203,7 +206,12 @@ export default function FastagEnquiryModal({
 
     try {
       const payload = new FormData();
+      payload.append("access_key", WEB3FORMS_ACCESS_KEY);
+      payload.append("subject", `${productLabel} Enquiry - ${formData.fullName.trim()}`);
+      payload.append("from_name", "TranSetu Website");
+      payload.append("product", productLabel);
       payload.append("enquiryType", type);
+      payload.append("name", formData.fullName.trim());
       payload.append("fullName", formData.fullName.trim());
       payload.append("mobile", formData.mobile.trim());
       payload.append("email", formData.email.trim());
@@ -217,21 +225,20 @@ export default function FastagEnquiryModal({
         payload.append("pincode", formData.pincode.trim());
       }
 
-      const response = await fetch(ENQUIRY_ENDPOINT, {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         body: payload,
       });
 
       const data = await response.json();
 
-      if (!response.ok || !data.success) {
+      if (data && data.success === true) {
+        setSubmitSuccess(true);
+      } else {
         setApiError(
-          data?.error || "We couldn't send your message right now. Please try again."
+          "We couldn't send your message right now. Please try again."
         );
-        return;
       }
-
-      setSubmitSuccess(true);
     } catch {
       setApiError("We couldn't send your message right now. Please try again.");
     } finally {
@@ -240,13 +247,6 @@ export default function FastagEnquiryModal({
   };
 
   if (!isOpen) return null;
-
-  const productLabel =
-    type === "fastag-holder"
-      ? "FASTag Holder"
-      : type === "gps"
-      ? "GPS Tracker"
-      : "FASTag";
 
   return (
     <AnimatePresence>
@@ -392,6 +392,7 @@ export default function FastagEnquiryModal({
                       <User size={16} className="fastag-input-icon" />
                       <input
                         type="text"
+                        name="fullName"
                         placeholder="e.g. Ramesh Kumar"
                         value={formData.fullName}
                         onChange={(event) =>
@@ -419,6 +420,7 @@ export default function FastagEnquiryModal({
                       <Phone size={16} className="fastag-input-icon" />
                       <input
                         type="tel"
+                        name="mobile"
                         placeholder="10-digit mobile number"
                         value={formData.mobile}
                         onChange={(event) =>
@@ -447,6 +449,7 @@ export default function FastagEnquiryModal({
                       <Mail size={16} className="fastag-input-icon" />
                       <input
                         type="email"
+                        name="email"
                         placeholder="name@example.com"
                         value={formData.email}
                         onChange={(event) =>
@@ -473,6 +476,7 @@ export default function FastagEnquiryModal({
                       >
                         <MessageSquare size={16} className="fastag-input-icon" style={{ marginTop: "12px", alignSelf: "flex-start" }} />
                         <textarea
+                          name="message"
                           placeholder={
                             isGps
                               ? "Tell us about your interest or questions regarding the GPS Tracker..."
@@ -507,6 +511,7 @@ export default function FastagEnquiryModal({
                         >
                           <MapPin size={16} className="fastag-input-icon" />
                           <textarea
+                            name="deliveryAddress"
                             placeholder="Enter full delivery address"
                             value={formData.deliveryAddress}
                             onChange={(event) =>
@@ -535,6 +540,7 @@ export default function FastagEnquiryModal({
                           <Building size={16} className="fastag-input-icon" />
                           <input
                             type="text"
+                            name="city"
                             placeholder="e.g. Visakhapatnam"
                             value={formData.city}
                             onChange={(event) =>
@@ -560,6 +566,7 @@ export default function FastagEnquiryModal({
                           <Navigation size={16} className="fastag-input-icon" />
                           <input
                             type="text"
+                            name="state"
                             placeholder="e.g. Andhra Pradesh"
                             value={formData.state}
                             onChange={(event) =>
@@ -585,6 +592,7 @@ export default function FastagEnquiryModal({
                           <MapPin size={16} className="fastag-input-icon" />
                           <input
                             type="text"
+                            name="pincode"
                             placeholder="6-digit postal code"
                             value={formData.pincode}
                             onChange={(event) =>
