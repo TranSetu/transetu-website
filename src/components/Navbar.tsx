@@ -104,25 +104,6 @@ export default function Navbar() {
             Products
           </Link>
         </div>
-
-        <div className="nav-actions">
-          <button
-            type="button"
-            className="btn-onboarding"
-            onClick={() => setIsOnboardingOpen(true)}
-          >
-            Onboarding
-          </button>
-          <button
-            type="button"
-            className="mobile-menu-toggle"
-            onClick={toggleMenu}
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
-          </button>
-        </div>
       </div>
     </nav>
 
