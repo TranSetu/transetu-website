@@ -47,7 +47,7 @@ export default function Products() {
       image: "/products/gps-tracker.png",
       bestSeller: false,
       isComingSoon: true,
-      href: "/product/gps-tracker",
+      href: "/product/gps-tracker/",
       buttonText: "View Details",
       icon: Navigation
     }
@@ -113,7 +113,7 @@ export default function Products() {
 
                     {product.name === "GPS Trackers" ? (
                       <Link
-                        href="/product/gps-tracker"
+                        href="/product/gps-tracker/"
                         className="product-card-button"
                         aria-label="View details for GPS Trackers"
                       >

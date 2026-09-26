@@ -24,7 +24,7 @@ export default function Navbar() {
 
     // Only run IntersectionObserver on the home page
     if (pathname === "/") {
-      const sections = ["home", "products", "about"];
+      const sections = ["home", "products", "about", "become-agent"];
       const observers = sections.map((sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -36,7 +36,7 @@ export default function Navbar() {
                 }
               });
             },
-            { threshold: 0.5 } // Trigger when 50% of section is visible
+            { threshold: 0.3 }
           );
           observer.observe(element);
           return observer;
@@ -50,6 +50,8 @@ export default function Navbar() {
       };
     } else if (pathname.startsWith("/product")) {
       requestAnimationFrame(() => setActiveLink("products"));
+    } else if (pathname.startsWith("/become-agent")) {
+      requestAnimationFrame(() => setActiveLink("become-agent"));
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -103,6 +105,25 @@ export default function Navbar() {
           >
             Products
           </Link>
+          <Link
+            href="/#become-agent"
+            className={`nav-link ${activeLink === "become-agent" ? "active" : ""}`}
+            onClick={() => handleLinkClick("become-agent")}
+          >
+            Become an Agent
+          </Link>
+        </div>
+
+        <div className="nav-actions">
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
         </div>
       </div>
     </nav>
@@ -131,16 +152,13 @@ export default function Navbar() {
         >
           Products
         </Link>
-        <button
-          type="button"
-          className="mobile-signup-btn"
-          onClick={() => {
-            setIsMenuOpen(false);
-            setIsOnboardingOpen(true);
-          }}
+        <Link
+          href="/#become-agent"
+          className={`mobile-nav-link ${activeLink === "become-agent" ? "active" : ""}`}
+          onClick={() => handleLinkClick("become-agent")}
         >
-          Onboarding
-        </button>
+          Become an Agent
+        </Link>
       </div>
     </div>
 
