@@ -1,0 +1,873 @@
+/* ==========================================================================
+   TranSetu Become an Agent Page Styles
+   Brand Colors:
+   Primary Green: #05A223
+   Lime Green:    #59C71C
+   Deep Green:    #087A3E
+   Navy:          #0B172A
+   Primary Text:  #10231D
+   Secondary Text:#263D35
+   Soft Green:    #EAF4EE
+   Border:        #DCE8E1
+   ========================================================================== */
+
+.become-agent-page {
+  background-color: #FFFFFF;
+  color: #10231D;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.agent-hero {
+  position: relative;
+  padding: 140px 0 80px 0;
+  background: linear-gradient(180deg, #EAF4EE 0%, #FFFFFF 100%);
+  border-bottom: 1px solid #DCE8E1;
+}
+
+.agent-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.agent-back-nav-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.agent-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #334E43;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  background: #FFFFFF;
+  border: 1px solid #DCE8E1;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.2;
+  width: fit-content;
+  box-shadow: 0 1px 3px rgba(16, 35, 29, 0.04);
+}
+
+.agent-back-btn:hover {
+  color: #05A223;
+  border-color: #05A223;
+  background-color: #F6FAF7;
+  box-shadow: 0 2px 8px rgba(5, 162, 35, 0.12);
+  transform: translateX(-3px);
+}
+
+.agent-back-btn:focus-visible {
+  outline: 2px solid #05A223;
+  outline-offset: 2px;
+}
+
+.agent-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FFFFFF;
+  border: 1px solid #DCE8E1;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #05A223;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(16, 35, 29, 0.04);
+}
+
+.agent-hero-badge-icon {
+  color: #05A223;
+}
+
+.agent-hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0B172A;
+  margin-bottom: 20px;
+  letter-spacing: -0.025em;
+  max-width: 840px;
+}
+
+.agent-hero-title-highlight {
+  color: #05A223;
+}
+
+.agent-hero-subtitle {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #263D35;
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.agent-hero-ctas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.agent-btn-primary {
+  background-color: #05A223;
+  color: #FFFFFF;
+  padding: 14px 34px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.25);
+}
+
+.agent-btn-primary:hover {
+  background-color: #087A3E;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(8, 122, 62, 0.32);
+}
+
+.agent-btn-primary:active {
+  transform: translateY(0);
+}
+
+.agent-hero-trust-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(220, 232, 225, 0.8);
+}
+
+.agent-hero-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #263D35;
+}
+
+.agent-hero-trust-icon {
+  color: #05A223;
+}
+
+/* ==========================================================================
+   COMMON SECTION STYLING
+   ========================================================================== */
+.agent-section {
+  padding: 80px 0;
+  border-bottom: 1px solid #DCE8E1;
+}
+
+.agent-section.alt-bg {
+  background-color: #F8FAF8;
+}
+
+.agent-section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.agent-section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 52px auto;
+}
+
+.agent-section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #05A223;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.agent-section-heading {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0B172A;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.agent-section-subtext {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #263D35;
+}
+
+/* ==========================================================================
+   SECTION 1: WHAT DOES AN AGENT DO?
+   ========================================================================== */
+.agent-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.agent-role-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.agent-role-card:hover {
+  border-color: rgba(5, 162, 35, 0.4);
+  box-shadow: 0 8px 24px rgba(16, 35, 29, 0.06);
+  transform: translateY(-2px);
+}
+
+.agent-card-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #EAF4EE;
+  color: #05A223;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.agent-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0B172A;
+  margin-bottom: 10px;
+}
+
+.agent-card-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #263D35;
+}
+
+/* ==========================================================================
+   SECTION 2: WHY BECOME A TRANSETU AGENT?
+   ========================================================================== */
+.agent-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.agent-benefit-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 16px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.agent-benefit-card:hover {
+  border-color: #05A223;
+  box-shadow: 0 8px 24px rgba(5, 162, 35, 0.08);
+}
+
+.agent-benefit-category {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #05A223;
+  margin-bottom: 8px;
+}
+
+.agent-benefit-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0B172A;
+  margin-bottom: 12px;
+}
+
+.agent-benefit-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #263D35;
+}
+
+/* ==========================================================================
+   SECTION 3: WHAT CAN AN AGENT OFFER? (FULL IMAGE COVERAGE)
+   ========================================================================== */
+.agent-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.agent-product-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.agent-product-card:hover {
+  border-color: #05A223;
+  box-shadow: 0 10px 28px rgba(16, 35, 29, 0.08);
+}
+
+.agent-product-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-color: #EAF4EE;
+  overflow: hidden;
+  border-bottom: 1px solid #DCE8E1;
+}
+
+.agent-product-img {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.agent-product-card:hover .agent-product-img {
+  transform: scale(1.04);
+}
+
+.agent-product-body {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.agent-product-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.agent-product-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0B172A;
+}
+
+.agent-product-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #05A223;
+  background-color: #EAF4EE;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(5, 162, 35, 0.2);
+}
+
+.agent-product-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #263D35;
+  margin-bottom: 18px;
+}
+
+.agent-product-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #DCE8E1;
+}
+
+.agent-product-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #10231D;
+  font-weight: 500;
+}
+
+.agent-product-feature-icon {
+  color: #05A223;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SECTION 4: WHO CAN BECOME AN AGENT?
+   ========================================================================== */
+.agent-eligibility-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 18px;
+  padding: 40px;
+  margin-bottom: 36px;
+}
+
+.agent-eligibility-statement {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #10231D;
+  font-weight: 500;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #DCE8E1;
+}
+
+.agent-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.agent-profile-item {
+  background-color: #F8FAF8;
+  border: 1px solid #DCE8E1;
+  border-radius: 12px;
+  padding: 22px 18px;
+}
+
+.agent-profile-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0B172A;
+  margin-bottom: 6px;
+}
+
+.agent-profile-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #263D35;
+}
+
+.agent-eligibility-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #EAF4EE;
+  border: 1px solid rgba(5, 162, 35, 0.25);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #10231D;
+}
+
+.agent-eligibility-disclaimer-icon {
+  color: #05A223;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   SECTION 5: HOW TO BECOME A TRANSETU AGENT (CLICKABLE FLOW STEPS)
+   ========================================================================== */
+.agent-steps-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.agent-step-flow-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 16px;
+  padding: 26px 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.agent-step-flow-card:hover {
+  border-color: #05A223;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(5, 162, 35, 0.12);
+}
+
+.agent-step-flow-number {
+  font-size: 13px;
+  font-weight: 800;
+  color: #05A223;
+  background-color: #EAF4EE;
+  padding: 4px 10px;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-bottom: 14px;
+}
+
+.agent-step-flow-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0B172A;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.agent-step-flow-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #263D35;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.agent-step-flow-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #05A223;
+  padding-top: 10px;
+  border-top: 1px dashed #DCE8E1;
+  margin-top: auto;
+  transition: gap 0.2s ease;
+}
+
+.agent-step-flow-card:hover .agent-step-flow-action {
+  gap: 9px;
+  color: #087A3E;
+}
+
+/* ==========================================================================
+   SECTION 6: WHAT YOU'LL NEED FOR ONBOARDING
+   ========================================================================== */
+.agent-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.agent-doc-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #DCE8E1;
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.25s ease;
+}
+
+.agent-doc-card:hover {
+  border-color: #05A223;
+  box-shadow: 0 6px 18px rgba(16, 35, 29, 0.05);
+}
+
+.agent-doc-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #EAF4EE;
+  color: #05A223;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agent-doc-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-doc-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0B172A;
+  margin-bottom: 4px;
+}
+
+.agent-doc-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #263D35;
+}
+
+.agent-docs-privacy-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  font-size: 13.5px;
+  color: #263D35;
+  background-color: #F8FAF8;
+  border: 1px solid #DCE8E1;
+  border-radius: 10px;
+  padding: 14px 20px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.agent-docs-privacy-icon {
+  color: #05A223;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   SECTION 7: READY TO BECOME A TRANSETU AGENT? (COHESIVE SOFT-GREEN THEME)
+   ========================================================================== */
+.agent-cta-section {
+  padding: 88px 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EAF4EE 100%);
+  border-top: 1px solid #DCE8E1;
+  position: relative;
+}
+
+.agent-cta-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.agent-cta-card-box {
+  background-color: #FFFFFF;
+  border: 2px solid #DCE8E1;
+  border-radius: 24px;
+  padding: 56px 48px;
+  text-align: center;
+  box-shadow: 0 6px 28px rgba(16, 35, 29, 0.05);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.agent-cta-card-box:hover {
+  border-color: rgba(5, 162, 35, 0.4);
+  box-shadow: 0 10px 36px rgba(5, 162, 35, 0.09);
+}
+
+.agent-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #EAF4EE;
+  color: #05A223;
+  border: 1px solid rgba(5, 162, 35, 0.2);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 20px;
+}
+
+.agent-cta-title {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0B172A;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.agent-cta-desc {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #263D35;
+  max-width: 620px;
+  margin: 0 auto 36px auto;
+}
+
+.agent-cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.agent-cta-btn-primary {
+  background-color: #05A223;
+  color: #FFFFFF;
+  padding: 15px 36px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.3);
+}
+
+.agent-cta-btn-primary:hover {
+  background-color: #087A3E;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(8, 122, 62, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Mobile, Tablet, Desktop)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .agent-hero-title {
+    font-size: 38px;
+  }
+
+  .agent-roles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-steps-flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .agent-docs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agent-cta-card-box {
+    padding: 44px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agent-hero {
+    padding: 120px 0 60px 0;
+  }
+
+  .agent-back-nav-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .agent-back-btn {
+    font-size: 12.5px;
+    padding: 6px 12px;
+  }
+
+  .agent-hero-title {
+    font-size: 30px;
+  }
+
+  .agent-hero-subtitle {
+    font-size: 16px;
+  }
+
+  .agent-section {
+    padding: 60px 0;
+  }
+
+  .agent-section-heading {
+    font-size: 26px;
+  }
+
+  .agent-roles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-product-img-wrap {
+    height: 220px;
+  }
+
+  .agent-profiles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-steps-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-docs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-eligibility-card {
+    padding: 24px 20px;
+  }
+
+  .agent-cta-card-box {
+    padding: 32px 20px;
+    border-radius: 18px;
+  }
+
+  .agent-cta-title {
+    font-size: 26px;
+  }
+
+  .agent-cta-desc {
+    font-size: 15px;
+  }
+
+  .agent-btn-primary,
+  .agent-cta-btn-primary {
+    width: 100%;
+  }
+
+  .agent-hero-trust-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-hero-title {
+    font-size: 26px;
+  }
+
+  .agent-section-heading {
+    font-size: 22px;
+  }
+
+  .agent-card-title {
+    font-size: 17px;
+  }
+}

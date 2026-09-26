@@ -32,6 +32,11 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
+import {
+  sendOtpApi,
+  verifyOtpApi,
+  submitOnboardingFlow,
+} from "@/lib/onboardingApi";
 import "./OnboardingModal.css";
 
 export interface OnboardingModalProps {
@@ -164,6 +169,8 @@ export default function OnboardingModal({
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [isResendingOtp, setIsResendingOtp] = useState(false);
   const [resendNotice, setResendNotice] = useState(false);
+  const [otpId, setOtpId] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string>("");
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const otpInputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -179,6 +186,8 @@ export default function OnboardingModal({
     setOtpSent(false);
     setOtpDigits(["", "", "", "", "", ""]);
     setOtpError("");
+    setOtpId(null);
+    setSubmitError("");
     setIsResendingOtp(false);
     setResendNotice(false);
     setShowPassword(false);
@@ -290,8 +299,12 @@ export default function OnboardingModal({
   // Handlers
   // =========================================================================
 
+  // =========================================================================
+  // OTP Verification Handlers (Staging API Integration)
+  // =========================================================================
+
   // Send OTP
-  const handleSendOtp = () => {
+  const handleSendOtp = async () => {
     if (!isMobileValid) {
       setTouched((prev) => ({ ...prev, mobileNumber: true }));
       return;
@@ -300,56 +313,80 @@ export default function OnboardingModal({
     setOtpError("");
     setResendNotice(false);
 
-    // Simulated network latency for mock OTP dispatch
-    setTimeout(() => {
+    try {
+      const res = await sendOtpApi(formData.mobileNumber, "REGISTER");
+      const returnedOtpId = res.data?.otp_id || (res as any)?.otp_id;
+      if (res.ok && returnedOtpId) {
+        setOtpId(returnedOtpId);
+        setOtpSent(true);
+        setOtpDigits(["", "", "", "", "", ""]);
+        setOtpError("");
+        setTimeout(() => {
+          otpInputRefs.current[0]?.focus();
+        }, 100);
+      } else {
+        setOtpError(res.message || "Failed to send verification code.");
+      }
+    } catch {
+      setOtpError("Network error: Unable to connect to verification server.");
+    } finally {
       setIsSendingOtp(false);
-      setOtpSent(true);
-      setOtpDigits(["", "", "", "", "", ""]);
-      setTimeout(() => {
-        otpInputRefs.current[0]?.focus();
-      }, 100);
-    }, 600);
+    }
   };
 
-  // Resend OTP - only sends another OTP when the user clicks this option
-  const handleResendOtp = () => {
+  // Resend OTP
+  const handleResendOtp = async () => {
+    if (!formData.mobileNumber) return;
     setIsResendingOtp(true);
     setOtpError("");
-    setTimeout(() => {
+    try {
+      const res = await sendOtpApi(formData.mobileNumber, "REGISTER");
+      const returnedOtpId = res.data?.otp_id || (res as any)?.otp_id;
+      if (res.ok && returnedOtpId) {
+        setOtpId(returnedOtpId);
+        setOtpDigits(["", "", "", "", "", ""]);
+        setOtpError("");
+        setResendNotice(true);
+        setTimeout(() => setResendNotice(false), 3000);
+        setTimeout(() => {
+          otpInputRefs.current[0]?.focus();
+        }, 100);
+      } else {
+        setOtpError(res.message || "Failed to resend verification code.");
+      }
+    } catch {
+      setOtpError("Network error: Unable to connect to verification server.");
+    } finally {
       setIsResendingOtp(false);
-      setOtpDigits(["", "", "", "", "", ""]);
-      setResendNotice(true);
-      setTimeout(() => setResendNotice(false), 3000);
-      otpInputRefs.current[0]?.focus();
-    }, 400);
+    }
   };
 
   // OTP Digit Change
   const handleOtpDigitChange = (index: number, val: string) => {
-    const numericChar = val.replace(/\D/g, "");
-    if (!numericChar && val !== "") return;
+    const numericChars = val.replace(/\D/g, "");
+    if (!numericChars && val !== "") return;
 
     const newDigits = [...otpDigits];
 
-    if (val.length > 1) {
-      // Handle paste
-      const pasted = val.replace(/\D/g, "").slice(0, 6);
+    if (numericChars.length > 1) {
+      // Pasting into any digit box
+      const pasted = numericChars.slice(0, 6);
       for (let i = 0; i < 6; i++) {
         newDigits[i] = pasted[i] || "";
       }
       setOtpDigits(newDigits);
       setOtpError("");
-      const focusIndex = Math.min(pasted.length, 5);
+      const focusIndex = Math.min(pasted.length - 1, 5);
       otpInputRefs.current[focusIndex]?.focus();
       return;
     }
 
-    newDigits[index] = numericChar;
+    newDigits[index] = numericChars;
     setOtpDigits(newDigits);
     setOtpError("");
 
     // Auto-focus next input
-    if (numericChar && index < 5) {
+    if (numericChars && index < 5) {
       otpInputRefs.current[index + 1]?.focus();
     }
   };
@@ -358,6 +395,11 @@ export default function OnboardingModal({
     index: number,
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
+    if (e.key === "Enter" && otpDigits.join("").length === 6) {
+      e.preventDefault();
+      handleVerifyOtp();
+      return;
+    }
     if (e.key === "Backspace") {
       if (!otpDigits[index] && index > 0) {
         const newDigits = [...otpDigits];
@@ -369,25 +411,39 @@ export default function OnboardingModal({
   };
 
   // Verify OTP
-  const handleVerifyOtp = () => {
+  const handleVerifyOtp = async () => {
     const enteredOtp = otpDigits.join("");
     if (enteredOtp.length !== 6) {
       setOtpError("Please enter all 6 digits of the OTP.");
+      return;
+    }
+    if (!otpId) {
+      setOtpError("Please request an OTP first.");
       return;
     }
 
     setIsVerifyingOtp(true);
     setOtpError("");
 
-    setTimeout(() => {
-      setIsVerifyingOtp(false);
-      // Mock OTP validation
-      if (enteredOtp === "123456") {
+    try {
+      const res = await verifyOtpApi(otpId, enteredOtp, "REGISTER");
+      const isVerified =
+        res.ok &&
+        (res.data?.verified === true ||
+          (res as any)?.verified === true ||
+          (res.status === 200 && (res.data?.verified !== false)));
+
+      if (isVerified) {
+        setOtpError("");
         setStep(2);
       } else {
-        setOtpError("Invalid OTP. Please enter the valid verification code.");
+        setOtpError(res.message || "Invalid OTP entered. Please try again.");
       }
-    }, 500);
+    } catch {
+      setOtpError("Network error: Unable to connect to verification server.");
+    } finally {
+      setIsVerifyingOtp(false);
+    }
   };
 
   // File Upload Handler
@@ -418,21 +474,54 @@ export default function OnboardingModal({
     }
   };
 
-  // Submit Handler -> Step 7 Waiting Screen
+  // Submit Handler -> Integrates with existing Node.js APIs
   const handleSubmit = async () => {
     if (!isStep2Complete || !isStep3Complete || !isStep4Complete || !isStep5Complete) {
       return;
     }
 
     setIsSubmitting(true);
+    setSubmitError("");
 
-    setTimeout(() => {
+    try {
+      const res = await submitOnboardingFlow({
+        mobileNumber: formData.mobileNumber,
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        notes: formData.notes,
+        profilePicture: formData.profilePicture,
+        aadhaarNumber: formData.aadhaarNumber,
+        aadhaarFront: formData.aadhaarFront,
+        aadhaarBack: formData.aadhaarBack,
+        panNumber: formData.panNumber,
+        panFront: formData.panFront,
+        panBack: formData.panBack,
+        bankName: formData.bankName,
+        accountHolderName: formData.accountHolderName,
+        accountNumber: formData.accountNumber,
+        ifscCode: formData.ifscCode,
+        branchName: formData.branchName,
+        bankPassbook: formData.bankPassbook,
+      });
+
       setIsSubmitting(false);
-      setStep(7);
-      if (onSubmitSuccess) {
-        onSubmitSuccess();
+
+      if (res.success) {
+        setStep(7);
+        if (onSubmitSuccess) {
+          onSubmitSuccess();
+        }
+      } else {
+        setSubmitError(res.message);
       }
-    }, 1000);
+    } catch {
+      setIsSubmitting(false);
+      setSubmitError(
+        "Failed to submit application. Please check your network connection and try again."
+      );
+    }
   };
 
   if (!isOpen) return null;
@@ -619,6 +708,7 @@ export default function OnboardingModal({
                                 .replace(/\D/g, "")
                                 .slice(0, 10);
                               setFormData({ ...formData, mobileNumber: val });
+                              if (otpError) setOtpError("");
                             }}
                             onBlur={() =>
                               setTouched((prev) => ({ ...prev, mobileNumber: true }))
@@ -639,6 +729,15 @@ export default function OnboardingModal({
                         ) : (
                           <span className="onboarding-hint">
                             Must be a valid 10-digit number starting with 6-9
+                          </span>
+                        )}
+                        {otpError && (
+                          <span
+                            className="onboarding-error-msg"
+                            style={{ marginTop: "8px" }}
+                          >
+                            <AlertCircle size={13} />
+                            {otpError}
                           </span>
                         )}
                       </div>
@@ -668,7 +767,7 @@ export default function OnboardingModal({
                     <div className="onboarding-form-grid single-col">
                       <div className="onboarding-otp-sent-banner">
                         <span>
-                          OTP sent to <strong>+91 {formData.mobileNumber}</strong>
+                          Mobile: <strong>+91 {formData.mobileNumber}</strong>
                         </span>
                         <button
                           type="button"
@@ -677,6 +776,7 @@ export default function OnboardingModal({
                             setOtpSent(false);
                             setOtpDigits(["", "", "", "", "", ""]);
                             setOtpError("");
+                            setOtpId(null);
                           }}
                         >
                           Change
@@ -697,12 +797,29 @@ export default function OnboardingModal({
                               }}
                               type="text"
                               inputMode="numeric"
-                              maxLength={idx === 0 ? 6 : 1}
+                              maxLength={6}
                               value={digit}
                               onChange={(e) =>
                                 handleOtpDigitChange(idx, e.target.value)
                               }
                               onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                              onPaste={(e) => {
+                                e.preventDefault();
+                                const pasted = e.clipboardData
+                                  .getData("text")
+                                  .replace(/\D/g, "")
+                                  .slice(0, 6);
+                                if (pasted) {
+                                  const newDigits = ["", "", "", "", "", ""];
+                                  for (let i = 0; i < 6; i++) {
+                                    newDigits[i] = pasted[i] || "";
+                                  }
+                                  setOtpDigits(newDigits);
+                                  setOtpError("");
+                                  const focusIndex = Math.min(pasted.length - 1, 5);
+                                  otpInputRefs.current[focusIndex]?.focus();
+                                }
+                              }}
                               className={`onboarding-otp-digit ${
                                 otpError ? "has-error" : ""
                               }`}
@@ -744,6 +861,7 @@ export default function OnboardingModal({
                             setOtpDigits(["", "", "", "", "", ""]);
                             setOtpError("");
                             setResendNotice(false);
+                            setOtpId(null);
                           }}
                         >
                           Use another number
@@ -753,7 +871,7 @@ export default function OnboardingModal({
                       {resendNotice && (
                         <div className="onboarding-resend-notice">
                           <CheckCircle2 size={14} className="text-[#05A223]" />
-                          <span>A new verification code has been sent!</span>
+                          <span>New verification code sent successfully</span>
                         </div>
                       )}
 
@@ -1950,6 +2068,28 @@ export default function OnboardingModal({
                     </div>
                   </div>
 
+                  {submitError && (
+                    <div
+                      role="alert"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "12px 16px",
+                        backgroundColor: "#FEF2F2",
+                        border: "1px solid #FCA5A5",
+                        borderRadius: "10px",
+                        color: "#991B1B",
+                        fontSize: "13px",
+                        lineHeight: 1.4,
+                        marginBottom: "16px",
+                      }}
+                    >
+                      <AlertCircle size={18} style={{ flexShrink: 0, color: "#DC2626" }} />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
                   <div className="onboarding-review-consent">
                     <ShieldCheck
                       size={18}
@@ -2036,7 +2176,10 @@ export default function OnboardingModal({
               <button
                 type="button"
                 className="onboarding-btn-back"
-                onClick={() => setStep((prev) => (prev - 1) as 1 | 2 | 3 | 4 | 5 | 6)}
+                onClick={() => {
+                  setSubmitError("");
+                  setStep((prev) => (prev - 1) as 1 | 2 | 3 | 4 | 5 | 6);
+                }}
                 disabled={isSubmitting}
               >
                 <ArrowLeft size={16} />
