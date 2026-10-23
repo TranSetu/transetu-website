@@ -104,10 +104,11 @@ export default function Navbar() {
           >
             Products
           </Link>
-          <a href={PORTAL_URL} className="nav-link">
-            Agent Login
-          </a>
         </div>
+
+        <a href={PORTAL_URL} className="btn-agent-login">
+          Agent Login
+        </a>
       </div>
     </nav>
 
@@ -135,7 +136,7 @@ export default function Navbar() {
         >
           Products
         </Link>
-        <a href={PORTAL_URL} className="mobile-nav-link">
+        <a href={PORTAL_URL} className="mobile-signup-btn">
           Agent Login
         </a>
         <button
