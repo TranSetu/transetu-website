@@ -275,6 +275,37 @@ section {
   box-shadow: 0 6px 18px rgba(89, 199, 28, 0.38);
 }
 
+/* Agent Login: same look as the other green buttons. Its own class, so the
+   tablet/phone rule that hides the .nav-actions buttons does not hide it. */
+.btn-agent-login {
+  background-color: #05A223;
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(5, 162, 35, 0.25);
+}
+
+.btn-agent-login:hover {
+  background-color: #087A3E;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(89, 199, 28, 0.38);
+}
+
+@media (max-width: 480px) {
+  .btn-agent-login {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}
+
 .btn-signup {
   background: transparent;
   color: #05A223;

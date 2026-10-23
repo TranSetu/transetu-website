@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { PORTAL_URL } from "@/lib/links";
 
 export default function Footer() {
   return (
@@ -21,6 +22,7 @@ export default function Footer() {
               <li><Link href="/" className="footer-link">Home</Link></li>
               <li><Link href="/#products" className="footer-link">Products</Link></li>
               <li><Link href="/#about" className="footer-link">About Us</Link></li>
+              <li><a href={PORTAL_URL} className="footer-link">Agent Login</a></li>
             </ul>
           </div>
 

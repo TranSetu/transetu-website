@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import OnboardingModal from "@/components/OnboardingModal";
+import { PORTAL_URL } from "@/lib/links";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -104,6 +105,10 @@ export default function Navbar() {
             Products
           </Link>
         </div>
+
+        <a href={PORTAL_URL} className="btn-agent-login">
+          Agent Login
+        </a>
       </div>
     </nav>
 
@@ -131,6 +136,9 @@ export default function Navbar() {
         >
           Products
         </Link>
+        <a href={PORTAL_URL} className="mobile-signup-btn">
+          Agent Login
+        </a>
         <button
           type="button"
           className="mobile-signup-btn"
